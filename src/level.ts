@@ -1,25 +1,29 @@
 import { EventEmitter } from 'eventemitter3';
 import type { EntityJSON } from './entity.js';
 import { Entity } from './entity.js';
+import type { Node } from './node.js';
 
 export interface LevelJSON {
 	entities: EntityJSON[];
 }
 
-export class Level extends EventEmitter<{
-	tick: [];
-}> {
+export class Level
+	extends EventEmitter<{
+		update: [];
+	}>
+	implements Node<LevelJSON>
+{
 	public entities: Set<Entity> = new Set();
 
 	public constructor(public readonly id: string) {
 		super();
 	}
 
-	public tick() {
+	public update() {
 		for (const entity of this.entities) {
 			entity.update();
 		}
-		this.emit('tick');
+		this.emit('update');
 	}
 
 	public getEntityByID(id: string): Entity {

@@ -1,6 +1,7 @@
+import { EventEmitter } from 'eventemitter3';
 import { pick, randomHex } from 'utilium';
 import type { Level } from './level.js';
-import { EventEmitter } from 'eventemitter3';
+import type { Node } from './node.js';
 
 export interface Point {
 	x: number;
@@ -19,9 +20,12 @@ export interface EntityJSON {
 
 const copy = ['id', 'name', 'position', 'rotation', 'scale'] as const;
 
-export class Entity extends EventEmitter<{
-	tick: [];
-}> {
+export class Entity
+	extends EventEmitter<{
+		update: [];
+	}>
+	implements Node<EntityJSON>
+{
 	public name?: string;
 
 	public parent?: Entity;
@@ -55,7 +59,7 @@ export class Entity extends EventEmitter<{
 	}
 
 	public update(): void {
-		this.emit('tick');
+		this.emit('update');
 	}
 
 	public toJSON(): EntityJSON {
