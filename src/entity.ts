@@ -20,7 +20,7 @@ export interface EntityJSON {
 const copy = ['id', 'name', 'position', 'rotation', 'scale'] as const;
 
 export class Entity extends EventEmitter<{
-	tick: []
+	tick: [];
 }> {
 	public name?: string;
 
