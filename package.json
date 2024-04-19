@@ -44,6 +44,6 @@
 		"eventemitter3": "^5.0.1",
 		"pixi.js": "^8.1.0",
 		"tsx": "^4.7.2",
-		"utilium": "^0.1.6"
+		"utilium": "^0.1.8"
 	}
 }

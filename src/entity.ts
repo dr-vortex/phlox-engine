@@ -24,9 +24,9 @@ export class Entity {
 	public parent?: Entity;
 	public children: Set<Entity> = new Set();
 
-	public position: Point;
-	public rotation: Point;
-	public scale: Point;
+	public position: Point = { x: 0, y: 0 };
+	public rotation: Point = { x: 0, y: 0 };
+	public scale: Point = { x: 0, y: 0 };
 
 	protected _level: Level;
 	public get level(): Level {
