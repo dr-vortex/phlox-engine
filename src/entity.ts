@@ -1,5 +1,6 @@
 import { pick, randomHex } from 'utilium';
 import type { Level } from './level.js';
+import { EventEmitter } from 'eventemitter3';
 
 export interface Point {
 	x: number;
@@ -18,7 +19,9 @@ export interface EntityJSON {
 
 const copy = ['id', 'name', 'position', 'rotation', 'scale'] as const;
 
-export class Entity {
+export class Entity extends EventEmitter<{
+	tick: []
+}> {
 	public name?: string;
 
 	public parent?: Entity;
@@ -47,7 +50,12 @@ export class Entity {
 		public readonly id = randomHex(32),
 		level: Level
 	) {
+		super();
 		this.level = level;
+	}
+
+	public update(): void {
+		this.emit('tick');
 	}
 
 	public toJSON(): EntityJSON {
